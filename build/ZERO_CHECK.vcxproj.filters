@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Asger\Desktop\programming\stupid-associative-array\build\CMakeFiles\6f447f1c20c38beb1f70dab38339b164\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{20C1CEAC-1AAC-3B8F-9979-33089E27940F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

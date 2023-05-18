@@ -1,0 +1,3 @@
+C:/Users/Asger/Desktop/programming/stupid-associative-array/build/CMakeFiles/testing_program.dir
+C:/Users/Asger/Desktop/programming/stupid-associative-array/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/Asger/Desktop/programming/stupid-associative-array/build/CMakeFiles/ZERO_CHECK.dir
