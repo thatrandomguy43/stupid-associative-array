@@ -6,7 +6,7 @@ VERSION 0.1
 )
 
 add_executable(testing_program)
-target_sources(testing_program PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp ${CMAKE_CURRENT_SOURCE_DIR}/StupidTable.hpp ${CMAKE_CURRENT_SOURCE_DIR}/StupidTable.cpp)
+target_sources(testing_program PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp ${CMAKE_CURRENT_SOURCE_DIR}/StupidTable.hpp)
 
 
 
