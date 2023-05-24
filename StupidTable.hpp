@@ -118,6 +118,10 @@ public:
             return nullptr;
         }
     }
+    //massive brain engineering here
+    size_t size() {
+        return this->item_count;
+    }
 
     void erase(key_t delete_key){
         Bucket& target_bucket = this->search_buckets(delete_key);
@@ -143,6 +147,22 @@ public:
             this->reallocate();
         }
         return target_bucket.contents.at(element_pos.value()).second;
+    }
+
+    bool operator==(const StupidCompTable<key_t,value_t>& other) {
+        if (this->item_count != other.item_count){
+            return false;
+        }
+        for (auto own_bucket : this->ordered_buckets){
+            for (auto bucket_item : own_bucket.contents){
+                auto other_search_result == other.find(bucket_item.first);
+                //bit of a monster oneliner here, first checks if the key was found, and then checks if the value is the same in both
+                if (not std::holds_alternative<nullptr_t>(other_search_result) and *(get<pair<key_t,value_t>*>)(other_search_result) == bucket_item){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 };
