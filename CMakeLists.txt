@@ -14,4 +14,5 @@ target_sources(testing_program PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp ${CMA
 
 if(MSVC)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++latest")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W3")
 endif(MSVC)

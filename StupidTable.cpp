@@ -1,1 +1,0 @@
-#include "StupidTable.hpp"

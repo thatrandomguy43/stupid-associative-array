@@ -1,0 +1,10 @@
+^C:\USERS\ASGER\DESKTOP\PROGRAMMING\STUPID-ASSOCIATIVE-ARRAY\BUILD\CMAKEFILES\6F447F1C20C38BEB1F70DAB38339B164\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Asger/Desktop/programming/stupid-associative-array -BC:/Users/Asger/Desktop/programming/stupid-associative-array/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/Asger/Desktop/programming/stupid-associative-array/build/stupid_table.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

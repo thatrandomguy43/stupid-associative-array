@@ -4,9 +4,6 @@
     <ClCompile Include="C:\Users\Asger\Desktop\programming\stupid-associative-array\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Asger\Desktop\programming\stupid-associative-array\StupidTable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\Asger\Desktop\programming\stupid-associative-array\StupidTable.hpp">
