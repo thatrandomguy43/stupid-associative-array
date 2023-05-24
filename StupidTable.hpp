@@ -18,7 +18,7 @@ private:
         key_t sort_value;
         std::vector<std::pair<key_t, value_t>> contents;
 
-        std::optional<size_t> search_contents(key_t to_find) {
+        std::optional<size_t> search_contents(key_t to_find) const {
             if (this->contents.size() == 0) {
                 return std::nullopt;
             }
@@ -71,7 +71,7 @@ private:
         }
     }
 
-    Bucket& search_buckets(key_t to_find) {
+    size_t search_buckets(key_t to_find) const {
         size_t range_begin = 0;
         size_t range_end = this->ordered_buckets.size() - 1;
         while (range_begin != range_end) {
@@ -87,7 +87,7 @@ private:
                 range_begin = pivot;
             }
         }
-        return this->ordered_buckets.at(range_begin);
+        return range_begin;
     }
 
     size_t insert(std::pair<key_t, value_t> new_value, Bucket& target_bucket) {
@@ -109,8 +109,8 @@ public:
         this->ordered_buckets.push_back(Bucket{});
     }
     //TODO replace return value with an iterator when i get around to those. this is a little clunky but ok for now. i really don't want to return a dangerous ptr, so nullptr_t makes "no result" explicit.
-    std::variant<std::pair<key_t, value_t>*, nullptr_t> find(key_t lookup_key){
-        Bucket& target_bucket = this->search_buckets(lookup_key);
+    std::variant<std::pair<key_t, value_t>*, nullptr_t> find(key_t lookup_key) const {
+        Bucket& target_bucket = this->ordered_buckets[this->search_buckets(lookup_key)];
         std::optional<size_t> element_pos = target_bucket.search_contents(lookup_key);
         if (element_pos.has_value()){
             return &target_bucket.contents.at(element_pos.value());
@@ -119,7 +119,7 @@ public:
         }
     }
     //massive brain engineering here
-    size_t size() {
+    size_t size() const {
         return this->item_count;
     }
 
@@ -137,7 +137,7 @@ public:
     }
 
     value_t& set(key_t lookup_key) {
-        Bucket& target_bucket = this->search_buckets(lookup_key);
+        Bucket& target_bucket = this->ordered_buckets[this->search_buckets(lookup_key)];
         std::optional<size_t> element_pos = target_bucket.search_contents(lookup_key);
         if (not element_pos.has_value()) {
             element_pos = this->insert({ lookup_key,value_t{} }, target_bucket);
@@ -155,10 +155,11 @@ public:
         }
         for (auto own_bucket : this->ordered_buckets){
             for (auto bucket_item : own_bucket.contents){
-                auto other_search_result == other.find(bucket_item.first);
-                //bit of a monster oneliner here, first checks if the key was found, and then checks if the value is the same in both
-                if (not std::holds_alternative<nullptr_t>(other_search_result) and *(get<pair<key_t,value_t>*>)(other_search_result) == bucket_item){
+                auto other_search_result = other.find(bucket_item.first);
+                if (not std::holds_alternative<nullptr_t>(other_search_result)){
+                    if (*(std::get<std::pair<key_t,value_t>*>(other_search_result)) == bucket_item){
                     return false;
+                    }
                 }
             }
         }
