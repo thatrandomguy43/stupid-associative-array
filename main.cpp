@@ -1,6 +1,6 @@
 #include "StupidTable.hpp"
 #include <string>
-
+#include <iostream>
 using namespace std;
 
 int main(){
@@ -13,6 +13,27 @@ int main(){
 
     shapes.set("pyramids") = 9;
 
+
+    StupidCompTable<int,char> roman_numerals{};
+    roman_numerals.set(1) = 'I';
+    roman_numerals.set(5) = 'V';
+    roman_numerals.set(10) = 'X';
+
+    StupidCompTable<int,char> more_roman_numerals{};
+    more_roman_numerals.set(50) = 'L';
+    more_roman_numerals.set(100) = 'C';
+    more_roman_numerals.set(500) = 'D';
+
+    cout << boolalpha << (roman_numerals == more_roman_numerals) << endl;
+
+    more_roman_numerals.set(1) = 'I';
+    more_roman_numerals.set(5) = 'V';
+    more_roman_numerals.set(10) = 'X';
+    roman_numerals.set(50) = 'L';
+    roman_numerals.set(100) = 'C';
+    roman_numerals.set(500) = 'D';
+
+    cout << boolalpha << (roman_numerals == more_roman_numerals) << endl;
     return 0;
 }
 
