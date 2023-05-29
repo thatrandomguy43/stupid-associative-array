@@ -1,4 +1,4 @@
-Build started 24-05-2023 23:07:49.
+Build started 30-05-2023 00:29:43.
 Logging verbosity is set to: Detailed.Process = "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\MSBuild.exe"
 MSBuild executable path = "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\MSBuild.exe"
 Command line arguments = "msbuild  build/testing_program.vcxproj /t:rebuild /fileLogger /property:WarningLevel=3"
@@ -2471,40 +2471,382 @@ Task "CL"
   Forcing recompile of all source files due to missing PDB "testing_program.dir\Debug\vc143.pdb".
   C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.35.32215\bin\HostX64\x64\CL.exe /c /Zi /nologo /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++latest /Fo"testing_program.dir\Debug\\" /Fd"testing_program.dir\Debug\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\Users\Asger\Desktop\programming\stupid-associative-array\main.cpp"
   Tracking command:
-  C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Tracker.exe /d "C:\Program Files (x86)\MSBuild\15.0\FileTracker\FileTracker32.dll" /i C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.dir\Debug\testing_program.tlog /r C:\USERS\ASGER\DESKTOP\PROGRAMMING\STUPID-ASSOCIATIVE-ARRAY\MAIN.CPP /b MSBuildConsole_CancelEventae23d1afba9143c1bf049512aab3540b  /c "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.35.32215\bin\HostX64\x64\CL.exe"  /c /Zi /nologo /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++latest /Fo"testing_program.dir\Debug\\" /Fd"testing_program.dir\Debug\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\Users\Asger\Desktop\programming\stupid-associative-array\main.cpp"
+  C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Tracker.exe /d "C:\Program Files (x86)\MSBuild\15.0\FileTracker\FileTracker32.dll" /i C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.dir\Debug\testing_program.tlog /r C:\USERS\ASGER\DESKTOP\PROGRAMMING\STUPID-ASSOCIATIVE-ARRAY\MAIN.CPP /b MSBuildConsole_CancelEventd6c5df75cf804ca5b2bc2b70e46770db  /c "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.35.32215\bin\HostX64\x64\CL.exe"  /c /Zi /nologo /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++latest /Fo"testing_program.dir\Debug\\" /Fd"testing_program.dir\Debug\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\Users\Asger\Desktop\programming\stupid-associative-array\main.cpp"
   main.cpp
-C:\Users\Asger\Desktop\programming\stupid-associative-array\StupidTable.hpp(113,31): error C2440: 'initializing': cannot convert from 'const _Ty' to 'StupidCompTable<std::string,int>::Bucket &' [C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj]
-          with
-          [
-              _Ty=StupidCompTable<std::string,int>::Bucket
-          ]
-C:\Users\Asger\Desktop\programming\stupid-associative-array\StupidTable.hpp(113,31): message : Conversion loses qualifiers [C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj]
-C:\Users\Asger\Desktop\programming\stupid-associative-array\StupidTable.hpp(112): message : while compiling class template member function 'std::variant<std::pair<key_t,value_t> *,std::nullptr_t> StupidCompTable<key_t,value_t>::find(key_t) const' [C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj]
-          with
-          [
-              key_t=std::string,
-              value_t=int
-          ]
-C:\Users\Asger\Desktop\programming\stupid-associative-array\main.cpp(11,39): message : see reference to function template instantiation 'std::variant<std::pair<key_t,value_t> *,std::nullptr_t> StupidCompTable<key_t,value_t>::find(key_t) const' being compiled [C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj]
-          with
-          [
-              key_t=std::string,
-              value_t=int
-          ]
-C:\Users\Asger\Desktop\programming\stupid-associative-array\main.cpp(7,33): message : see reference to class template instantiation 'StupidCompTable<std::string,int>' being compiled [C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj]
-  The command exited with code 2.
-Done executing task "CL" -- FAILED.
-Done building target "ClCompile" in project "testing_program.vcxproj" -- FAILED.
-Done Building Project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (rebuild target(s)) -- FAILED.
+Done executing task "CL".
+Done building target "ClCompile" in project "testing_program.vcxproj".
+Target "RunSelectedFileNativeCodeAnalysis" skipped, due to false condition; ('$(RunMsvcAnalysis)'=='true' and '$(SelectedFiles)'!='') was evaluated as ('false'=='true' and ''!='').
+Target "ManagedIncrementalBuildPostProcessDependencyGraph" skipped, due to false condition; ('@(ClCompile)' != '' and '$(EnableManagedIncrementalBuild)' == 'True') was evaluated as ('C:\Users\Asger\Desktop\programming\stupid-associative-array\main.cpp' != '' and 'false' == 'True').
+Target "NoAnalysisToolEnabledWarning" skipped, due to false condition; ('$(RunCppAnalysis)'=='true' AND '$(EnableMicrosoftCodeAnalysis)'=='false' AND '$(EnableClangTidyCodeAnalysis)'=='false') was evaluated as ('false'=='true' AND 'true'=='false' AND 'false'=='false').
+Target "RunSelectedFileClangTidy" skipped, due to false condition; ('$(RunClangCppAnalysis)'=='true' AND '$(SelectedFiles)'!='') was evaluated as ('false'=='true' AND ''!='').
+Target "MicrosoftAnalysisIncompatiableWithClangCl" skipped, due to false condition; ('$(RunCppAnalysis)'=='true' AND '$(EnableMicrosoftCodeAnalysis)'=='true' AND '$(UseClangCl)'=='true') was evaluated as ('false'=='true' AND 'true'=='true' AND ''=='true').
+Target "AfterClCompile" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_ClCompile" depends on it):
+Done building target "AfterClCompile" in project "testing_program.vcxproj".
+Target "_ClCompile" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_BuildCompileAction" depends on it):
+Done building target "_ClCompile" in project "testing_program.vcxproj".
+Target "_ResGen" skipped, due to false condition; ('@(EmbeddedResource)'!='') was evaluated as (''!='').
+Target "BeforeResourceCompile" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_ResourceCompile" depends on it):
+Done building target "BeforeResourceCompile" in project "testing_program.vcxproj".
+Target "MakeDirsForResourceCompile" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_ResourceCompile" depends on it):
+Task "MakeDir"
+Done executing task "MakeDir".
+Done building target "MakeDirsForResourceCompile" in project "testing_program.vcxproj".
+Target "ResourceCompile" skipped, due to false condition; ('@(ResourceCompile)' != '') was evaluated as ('' != '').
+Target "AfterResourceCompile" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_ResourceCompile" depends on it):
+Done building target "AfterResourceCompile" in project "testing_program.vcxproj".
+Target "_ResourceCompile" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_BuildCompileAction" depends on it):
+Done building target "_ResourceCompile" in project "testing_program.vcxproj".
+Target "_ImpLib" skipped, due to false condition; ('$(ImpLibCompiled)' == 'true') was evaluated as ('' == 'true').
+Target "_Lib" skipped, due to false condition; ('$(LibCompiled)' == 'true') was evaluated as ('' == 'true').
+Target "AfterBuildCompileEvent" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_BuildCompileAction" depends on it):
+Done building target "AfterBuildCompileEvent" in project "testing_program.vcxproj".
+Target "_BuildCompileAction" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "BuildCompile" depends on it):
+Done building target "_BuildCompileAction" in project "testing_program.vcxproj".
+Target "BuildCompile" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "Build" depends on it):
+Done building target "BuildCompile" in project "testing_program.vcxproj".
+Target "PrepareProjectReferences" skipped. Previously built successfully.
+Target "BuildLinkTraverse" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "BuildLink" depends on it):
+Task "MSBuild" skipped, due to false condition; ('$(BuildPassReferences)' == 'true' and '@(ProjectReferenceWithConfiguration)' != '' and '@(_MSBuildProjectReferenceExistent)' != ''  and '%(_MSBuildProjectReferenceExistent.BuildReference)' == 'true') was evaluated as ('' == 'true' and 'C:\Users\Asger\Desktop\programming\stupid-associative-array\build\ZERO_CHECK.vcxproj' != '' and 'C:\Users\Asger\Desktop\programming\stupid-associative-array\build\ZERO_CHECK.vcxproj' != ''  and 'true' == 'true').
+Done building target "BuildLinkTraverse" in project "testing_program.vcxproj".
+Target "PrepareForBuild" skipped. Previously built successfully.
+Target "ResolveReferences" skipped. Previously built successfully.
+Target "ComputeLegacyManifestEmbedding" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_BuildLinkAction" depends on it):
+Task "VCMessage" skipped, due to false condition; ('$(RevertManifestEmbedding)' == 'true' and '$(_LegacyManifestEmbeddingDebug)' == 'true') was evaluated as ('' == 'true' and '' == 'true').
+Done building target "ComputeLegacyManifestEmbedding" in project "testing_program.vcxproj".
+Target "BeforeLink" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_Link" depends on it):
+Done building target "BeforeLink" in project "testing_program.vcxproj".
+Target "ComputeRCOutputs" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "ComputeRCGeneratedLinkInputs" depends on it):
+Done building target "ComputeRCOutputs" in project "testing_program.vcxproj".
+Target "ComputeRCGeneratedLinkInputs" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_Link" depends on it):
+Done building target "ComputeRCGeneratedLinkInputs" in project "testing_program.vcxproj".
+Target "ComputeManifestGeneratedLinkerInputs" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_Link" depends on it):
+Done building target "ComputeManifestGeneratedLinkerInputs" in project "testing_program.vcxproj".
+Target "ComputeCustomBuildOutput" skipped. Previously built successfully.
+Target "GenerateTargetFrameworkMonikerAttribute" skipped, due to false condition; ('$(GenerateTargetFrameworkAttribute)' == 'true') was evaluated as ('false' == 'true').
+Target "ComputeMIDLGeneratedCompileInputs" skipped. Previously built successfully.
+Target "ComputeCLInputPDBName" skipped. Previously built successfully.
+Target "ComputeReferenceCLInput" skipped. Previously built successfully.
+Target "WarnCompileDuplicatedFilename" skipped. Previously built successfully.
+Target "FixupCLCompileOptions" skipped. Previously built successfully.
+Target "ComputeCLOutputs" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "ComputeCLGeneratedLinkInputs" depends on it):
+Done building target "ComputeCLOutputs" in project "testing_program.vcxproj".
+Target "ComputeCLGeneratedLinkInputs" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_Link" depends on it):
+Done building target "ComputeCLGeneratedLinkInputs" in project "testing_program.vcxproj".
+Target "ComputeLinkInputsFromProject" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_Link" depends on it):
+Done building target "ComputeLinkInputsFromProject" in project "testing_program.vcxproj".
+Target "GetReferencedVCProjectsInfo" skipped. Previously built successfully.
+Target "ResolvedLinkLib" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "ComputeReferenceLinkInputs" depends on it):
+Done building target "ResolvedLinkLib" in project "testing_program.vcxproj".
+Target "ComputeResolveLinkObj" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "ComputeReferenceLinkInputs" depends on it):
+Task "CallTarget" skipped, due to false condition; ('%(_MSBuildProjectReferenceExistent.UseLibraryDependencyInputs)'=='true') was evaluated as ('false'=='true').
+Done building target "ComputeResolveLinkObj" in project "testing_program.vcxproj".
+Target "ComputeReferenceLinkInputs" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_Link" depends on it):
+Task "VCMessage" skipped, due to false condition; ('%(ProjectReferenceToLink.ProjectType)' == 'DynamicLibrary' and '$(WindowsAppContainer)' == 'true' and '%(ProjectReferenceToLink.WindowsAppContainer)' != 'true') was evaluated as ('' == 'DynamicLibrary' and 'false' == 'true' and '' != 'true').
+Task "Message" skipped, due to false condition; ('$(_REFERENCE_DEBUG)'=='true') was evaluated as (''=='true').
+Done building target "ComputeReferenceLinkInputs" in project "testing_program.vcxproj".
+Target "ComputeManifestInputsTargets" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_Link" depends on it):
+Done building target "ComputeManifestInputsTargets" in project "testing_program.vcxproj".
+Target "ManifestResourceCompile" skipped, due to false condition; ('$(EmbedManifestBy)' == 'LINK' and '@(Manifest)' != '') was evaluated as ('LINK' == 'LINK' and '' != '').
+Target "AssignTargetPaths" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "PrepareResourceNames" depends on it):
+Task "AssignTargetPath"
+Done executing task "AssignTargetPath".
+Task "AssignTargetPath"
+Done executing task "AssignTargetPath".
+Task "AssignTargetPath"
+Done executing task "AssignTargetPath".
+Task "AssignTargetPath"
+Done executing task "AssignTargetPath".
+Task "AssignTargetPath" skipped, due to false condition; ('@(_DeploymentBaseManifestWithTargetPath)'=='' and '%(None.Extension)'=='.manifest') was evaluated as (''=='' and ''=='.manifest').
+Done building target "AssignTargetPaths" in project "testing_program.vcxproj".
+Target "AssignTargetPaths" skipped. Previously built successfully.
+Target "SplitResourcesByCulture" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "PrepareResourceNames" depends on it):
+Task "Warning" skipped, due to false condition; ('@(ResxWithNoCulture)'!='') was evaluated as (''!='').
+Task "Warning" skipped, due to false condition; ('@(ResxWithCulture)'!='') was evaluated as (''!='').
+Task "Warning" skipped, due to false condition; ('@(NonResxWithCulture)'!='') was evaluated as (''!='').
+Task "Warning" skipped, due to false condition; ('@(NonResxWithNoCulture)'!='') was evaluated as (''!='').
+Task "AssignCulture"
+Done executing task "AssignCulture".
+Done building target "SplitResourcesByCulture" in project "testing_program.vcxproj".
+Target "CreateManifestResourceNames" skipped, due to false condition; ('@(EmbeddedResource)' != '') was evaluated as ('' != '').
+Target "CreateCustomManifestResourceNames" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "PrepareResourceNames" depends on it):
+Done building target "CreateCustomManifestResourceNames" in project "testing_program.vcxproj".
+Target "PrepareResourceNames" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_Link" depends on it):
+Done building target "PrepareResourceNames" in project "testing_program.vcxproj".
+Target "MakeDirsForLink" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_Link" depends on it):
+Task "MakeDir"
+Done executing task "MakeDir".
+Done building target "MakeDirsForLink" in project "testing_program.vcxproj".
+Target "DoLinkOutputFilesMatch" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_Link" depends on it):
+Task "VCMessage" skipped, due to false condition; ('@(_OutputFileFromLink)' == '') was evaluated as ('C:\Users\Asger\Desktop\programming\stupid-associative-array\build\Debug\testing_program.exe' == '').
+Task "VCMessage" skipped, due to false condition; ('@(_OutputFileFromLink)' != '' and '%(_OutputFileFromLink.FullPath)' != '$([System.IO.Path]::GetFullPath($(TargetPath)))') was evaluated as ('C:\Users\Asger\Desktop\programming\stupid-associative-array\build\Debug\testing_program.exe' != '' and 'C:\Users\Asger\Desktop\programming\stupid-associative-array\build\Debug\testing_program.exe' != 'C:\Users\Asger\Desktop\programming\stupid-associative-array\build\Debug\testing_program.exe').
+Task "VCMessage" skipped, due to false condition; ('@(_OutputFileFromLink)' != '' and '%(_OutputFileFromLink.Extension)' != '' and '%(_OutputFileFromLink.Extension)' != '$(TargetExt)') was evaluated as ('C:\Users\Asger\Desktop\programming\stupid-associative-array\build\Debug\testing_program.exe' != '' and '.exe' != '' and '.exe' != '.exe').
+Task "VCMessage" skipped, due to false condition; ('@(_OutputFileFromLink)' != '' and '%(_OutputFileFromLink.Filename)' != '' and '%(_OutputFileFromLink.Filename)' != '$(TargetName)') was evaluated as ('C:\Users\Asger\Desktop\programming\stupid-associative-array\build\Debug\testing_program.exe' != '' and 'testing_program' != '' and 'testing_program' != 'testing_program').
+Task "VCMessage" skipped, due to false condition; ('%(Link.MinimumRequiredVersion)' != '' and ('%(Link.Subsystem)' == '' or '%(Link.Subsystem)' == 'NotSet')) was evaluated as ('' != '' and ('Console' == '' or 'Console' == 'NotSet')).
+Done building target "DoLinkOutputFilesMatch" in project "testing_program.vcxproj".
+Target "PreLinkEvent" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_Link" depends on it):
+Task "Message" skipped, due to false condition; ('%(PreLinkEvent.Message)' != '' and '%(PreLinkEvent.Command)' != '') was evaluated as ('' != '' and '' != '').
+Task "Exec" skipped, due to false condition; ('%(PreLinkEvent.Command)' != '') was evaluated as ('' != '').
+Done building target "PreLinkEvent" in project "testing_program.vcxproj".
+Target "ComputeLinkSwitches" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "Link" depends on it):
+Done building target "ComputeLinkSwitches" in project "testing_program.vcxproj".
+Target "Link" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_Link" depends on it):
+Using "Link" task from assembly "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.Build.CppTasks.Common.dll".
+Task "Link"
+  C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.35.32215\bin\HostX64\x64\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\Asger\Desktop\programming\stupid-associative-array\build\Debug\testing_program.exe" /INCREMENTAL /ILK:"testing_program.dir\Debug\testing_program.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Asger/Desktop/programming/stupid-associative-array/build/Debug/testing_program.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/Asger/Desktop/programming/stupid-associative-array/build/Debug/testing_program.lib" /MACHINE:X64  /machine:x64 testing_program.dir\Debug\main.obj
+  Tracking command:
+  C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Tracker.exe /a /d "C:\Program Files (x86)\MSBuild\15.0\FileTracker\FileTracker32.dll" /i C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.dir\Debug\testing_program.tlog /r C:\USERS\ASGER\DESKTOP\PROGRAMMING\STUPID-ASSOCIATIVE-ARRAY\BUILD\TESTING_PROGRAM.DIR\DEBUG\MAIN.OBJ /b MSBuildConsole_CancelEvente6a63f049ef64f5fb10aacc8430628f5  /c "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.35.32215\bin\HostX64\x64\link.exe"  /ERRORREPORT:QUEUE /OUT:"C:\Users\Asger\Desktop\programming\stupid-associative-array\build\Debug\testing_program.exe" /INCREMENTAL /ILK:"testing_program.dir\Debug\testing_program.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Asger/Desktop/programming/stupid-associative-array/build/Debug/testing_program.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/Asger/Desktop/programming/stupid-associative-array/build/Debug/testing_program.lib" /MACHINE:X64  /machine:x64 testing_program.dir\Debug\main.obj
+Done executing task "Link".
+Task "Message"
+  testing_program.vcxproj -> C:\Users\Asger\Desktop\programming\stupid-associative-array\build\Debug\testing_program.exe
+Done executing task "Message".
+Task "VCMessage" skipped, due to false condition; (('$(EmbedManifestBy)' != 'LINK' or '$(LegacyManifestEmbedding)' != 'true' or '$(LinkSkippedExecution)' == 'true') and
+             %(Link.GenerateDebugInformation) == 'DebugFastLink' and %(Link.ProgramDataBaseFileName) != '') was evaluated as (('LINK' != 'LINK' or '' != 'true' or 'False' == 'true') and
+             true == 'DebugFastLink' and  != '').
+Task "VCMessage" skipped, due to false condition; (('$(EmbedManifestBy)' != 'LINK' or '$(LegacyManifestEmbedding)' != 'true' or '$(LinkSkippedExecution)' == 'true') and
+             %(Link.GenerateDebugInformation) == 'true' and %(Link.ProgramDataBaseFileName) != '') was evaluated as (('LINK' != 'LINK' or '' != 'true' or 'False' == 'true') and
+             true == 'true' and  != '').
+Done building target "Link" in project "testing_program.vcxproj".
+Target "MetaGenInputsOutputs" skipped, due to false condition; ('$(EnableManagedIncrementalBuild)' == 'True') was evaluated as ('false' == 'True').
+Target "ComputeMetaGenInputs" skipped, due to false condition; ('$(CLRSupport)'!='' and '$(CLRSupport)'!='false' and '$(CLRSupport)'!='NetCore') was evaluated as ('false'!='' and 'false'!='false' and 'false'!='NetCore').
+Target "MetaGen" skipped, due to false condition; ('@(MetaGen)' != '') was evaluated as ('' != '').
+Target "ComputeLinkImportLibraryOutputsForClean" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_Link" depends on it):
+Task "WriteLinesToFile" skipped, due to false condition; ('@(_LinkSecondaryOutput)' != '') was evaluated as ('' != '').
+Done building target "ComputeLinkImportLibraryOutputsForClean" in project "testing_program.vcxproj".
+Target "AfterLink" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_Link" depends on it):
+Done building target "AfterLink" in project "testing_program.vcxproj".
+Target "_Link" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_BuildLinkAction" depends on it):
+Done building target "_Link" in project "testing_program.vcxproj".
+Target "_ALink" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_BuildLinkAction" depends on it):
+Done building target "_ALink" in project "testing_program.vcxproj".
+Target "ComputeLegacyManifestEmbedding" skipped. Previously built successfully.
+Target "_Manifest" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_BuildLinkAction" depends on it):
+Task "CallTarget" skipped, due to false condition; ('$(LegacyManifestEmbedding)' == 'true') was evaluated as ('' == 'true').
+Done building target "_Manifest" in project "testing_program.vcxproj".
+Target "RegisterOutput" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_BuildLinkAction" depends on it):
+Task "Exec" skipped, due to false condition; ('$(ConfigurationType)'=='DynamicLibrary' and '%(Link.RegisterOutput)'=='true' and '%(Link.PerUserRedirection)'!='true') was evaluated as ('Application'=='DynamicLibrary' and 'false'=='true' and 'false'!='true').
+Task "Exec" skipped, due to false condition; ('$(ConfigurationType)'=='DynamicLibrary' and '%(Link.RegisterOutput)'=='true' and '%(Link.PerUserRedirection)'=='true') was evaluated as ('Application'=='DynamicLibrary' and 'false'=='true' and 'false'=='true').
+Task "Exec" skipped, due to false condition; ('$(ConfigurationType)'=='Application' and '%(Link.RegisterOutput)'=='true' and '%(Link.PerUserRedirection)'!='true') was evaluated as ('Application'=='Application' and 'false'=='true' and 'false'!='true').
+Task "Exec" skipped, due to false condition; ('$(ConfigurationType)'=='Application' and '%(Link.RegisterOutput)'=='true' and '%(Link.PerUserRedirection)'=='true') was evaluated as ('Application'=='Application' and 'false'=='true' and 'false'=='true').
+Task "VCMessage" skipped, due to false condition; ('$(_RegisterOutputExitCode)' != '' and '$(_RegisterOutputExitCode)' != '0') was evaluated as ('' != '' and '' != '0').
+Done building target "RegisterOutput" in project "testing_program.vcxproj".
+Target "PrepareForBuild" skipped. Previously built successfully.
+Target "ResolveReferences" skipped. Previously built successfully.
+Target "ResolvedXDCMake" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_XdcMake" depends on it):
+Task "MSBuild" skipped, due to false condition; ('%(_MSBuildProjectReferenceExistent.Extension)' == '.vcxproj' and '@(ProjectReferenceWithConfiguration)' != '' and '@(_MSBuildProjectReferenceExistent)' != '' and '$(_ClCompileGenerateXMLDocumentationFiles)' == 'true') was evaluated as ('.vcxproj' == '.vcxproj' and 'C:\Users\Asger\Desktop\programming\stupid-associative-array\build\ZERO_CHECK.vcxproj' != '' and 'C:\Users\Asger\Desktop\programming\stupid-associative-array\build\ZERO_CHECK.vcxproj' != '' and '' == 'true').
+Done building target "ResolvedXDCMake" in project "testing_program.vcxproj".
+Target "ComputeCLCompileGeneratedXDCFiles" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_XdcMake" depends on it):
+Done building target "ComputeCLCompileGeneratedXDCFiles" in project "testing_program.vcxproj".
+Target "MakeDirsForXdcMake" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_XdcMake" depends on it):
+Task "MakeDir"
+Done executing task "MakeDir".
+Done building target "MakeDirsForXdcMake" in project "testing_program.vcxproj".
+Target "XdcMake" skipped, due to false condition; ('@(XdcMake)' != '') was evaluated as ('' != '').
+Target "_XdcMake" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_BuildLinkAction" depends on it):
+Done building target "_XdcMake" in project "testing_program.vcxproj".
+Target "ComputeCLCompileGeneratedSbrFiles" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_BscMake" depends on it):
+Done building target "ComputeCLCompileGeneratedSbrFiles" in project "testing_program.vcxproj".
+Target "MakeDirsForBscMake" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_BscMake" depends on it):
+Task "MakeDir"
+Done executing task "MakeDir".
+Done building target "MakeDirsForBscMake" in project "testing_program.vcxproj".
+Target "BscMake" skipped, due to false condition; ('@(BscMake)' != '') was evaluated as ('' != '').
+Target "CustomBuildStep" skipped, due to false condition; ('@(CustomBuildStep)' != '' and '$(SelectedFiles)'=='') was evaluated as ('' != '' and ''=='').
+Target "_BscMake" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_BuildLinkAction" depends on it):
+Done building target "_BscMake" in project "testing_program.vcxproj".
+Target "PrepareForBuild" skipped. Previously built successfully.
+Target "BuiltProjectOutputGroup" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "CreateRecipeFile" depends on it):
+Done building target "BuiltProjectOutputGroup" in project "testing_program.vcxproj".
+Target "PrepareForBuild" skipped. Previously built successfully.
+Target "PrepareResourceNames" skipped. Previously built successfully.
+Target "SatelliteDllsProjectOutputGroup" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "CreateRecipeFile" depends on it):
+Done building target "SatelliteDllsProjectOutputGroup" in project "testing_program.vcxproj".
+Target "PrepareForBuild" skipped. Previously built successfully.
+Target "AssignTargetPaths" skipped. Previously built successfully.
+Target "PrepareForBuild" skipped. Previously built successfully.
+Target "AssignTargetPaths" skipped. Previously built successfully.
+Target "MakeDirsForFxc" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "ContentFilesProjectOutputGroup" depends on it):
+Task "MakeDir"
+Done executing task "MakeDir".
+Done building target "MakeDirsForFxc" in project "testing_program.vcxproj".
+Target "_CreateCopyFileItems" skipped, due to false condition; ('@(CopyFileToFolders)' != '') was evaluated as ('' != '').
+Target "ContentFilesProjectOutputGroup" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "CreateRecipeFile" depends on it):
+Task "AssignTargetPath" skipped, due to false condition; ('@(ContentFilesProjectOutputGroupOutputFullPath)' != '' and '%(ContentFilesProjectOutputGroupOutputFullPath.RootFolder)' != '') was evaluated as ('' != '' and '' != '').
+Task "AssignTargetPath" skipped, due to false condition; ('@(ContentFilesProjectOutputGroupOutputFullPath)' != '' and '%(ContentFilesProjectOutputGroupOutputFullPath.RootFolder)' == '') was evaluated as ('' != '' and '' == '').
+Done building target "ContentFilesProjectOutputGroup" in project "testing_program.vcxproj".
+Target "GetReferencedVCProjectsInfo" skipped. Previously built successfully.
+Target "CreateRecipeFile" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_BuildLinkAction" depends on it):
+Using "GenerateDesktopDeployRecipe" task from assembly "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.Build.CppTasks.Common.dll".
+Task "GenerateDesktopDeployRecipe"
+Done executing task "GenerateDesktopDeployRecipe".
+Done building target "CreateRecipeFile" in project "testing_program.vcxproj".
+Target "_GenerateSatelliteAssemblyInputs" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "CreateSatelliteAssemblies" depends on it):
+Task "Warning" skipped, due to false condition; ('@(ManifestResourceWithCulture)'!='' and '%(ManifestResourceWithCulture.EmittedForCompatibilityOnly)'=='') was evaluated as (''!='' and ''=='').
+Task "Warning" skipped, due to false condition; ('@(ManifestNonResxWithCultureOnDisk)'!='' and '%(ManifestNonResxWithCultureOnDisk.EmittedForCompatibilityOnly)'=='') was evaluated as (''!='' and ''=='').
+Done building target "_GenerateSatelliteAssemblyInputs" in project "testing_program.vcxproj".
+Target "ComputeIntermediateSatelliteAssemblies" skipped, due to false condition; (@(ReferenceSatellitePaths->'%(DestinationSubDirectory)') != '') was evaluated as ( != '').
+Target "GenerateSatelliteAssemblies" skipped, due to false condition; ('@(_SatelliteAssemblyResourceInputs)' != '') was evaluated as ('' != '').
+Target "CreateSatelliteAssemblies" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_BuildLinkAction" depends on it):
+Done building target "CreateSatelliteAssemblies" in project "testing_program.vcxproj".
+Target "CopyLocalNativeReference" skipped, due to false condition; ('$(CopyLocalProjectReference)' == 'true') was evaluated as ('false' == 'true').
+Target "_Appverifier" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_BuildLinkAction" depends on it):
+Done building target "_Appverifier" in project "testing_program.vcxproj".
+Target "_Deploy" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_BuildLinkAction" depends on it):
+Done building target "_Deploy" in project "testing_program.vcxproj".
+Target "ComputeIntermediateSatelliteAssemblies" skipped, due to false condition; (@(ReferenceSatellitePaths->'%(DestinationSubDirectory)') != '') was evaluated as ( != '').
+Target "_CopyFilesMarkedCopyLocal" skipped, due to false condition; ('@(ReferenceCopyLocalPaths)' != '') was evaluated as ('' != '').
+Target "AssignTargetPaths" skipped. Previously built successfully.
+Target "AssignProjectConfiguration" skipped. Previously built successfully.
+Target "_SplitProjectReferencesByFileExistence" skipped. Previously built successfully.
+Target "_GetProjectReferenceTargetFrameworkProperties" skipped. Previously built successfully.
+Target "_PopulateCommonStateForGetCopyToOutputDirectoryItems" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "GetCopyToOutputDirectoryItems" depends on it):
+Done building target "_PopulateCommonStateForGetCopyToOutputDirectoryItems" in project "testing_program.vcxproj".
+Target "GetCopyToOutputDirectoryXamlAppDefs" in file "C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\Microsoft.Xaml.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "GetCopyToOutputDirectoryItems" depends on it):
+Task "AssignTargetPath"
+Done executing task "AssignTargetPath".
+Done building target "GetCopyToOutputDirectoryXamlAppDefs" in project "testing_program.vcxproj".
+Target "GetCopyToOutputDirectoryItems" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_CopySourceItemsToOutputDirectory" depends on it):
+Using "CallTarget" task from assembly "Microsoft.Build.Tasks.Core, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a".
+Task "CallTarget"
+Target "_PopulateCommonStateForGetCopyToOutputDirectoryItems" skipped. Previously built successfully.
+Target "_AddOutputPathToGlobalPropertiesToRemove" skipped. Previously built successfully.
+Target "_GetCopyToOutputDirectoryItemsFromTransitiveProjectReferences" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "GetCopyToOutputDirectoryItems" depends on it):
+Task "MSBuild"
+  Removing Properties for project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\ZERO_CHECK.vcxproj":
+    TargetFramework
+Project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (1) is building "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\ZERO_CHECK.vcxproj" (2:5) on node 1 (GetCopyToOutputDirectoryItems target(s)).
+Project file contains ToolsVersion="17.0". This toolset may be unknown or missing, in which case you may be able to resolve this by installing the appropriate version of MSBuild, or the build may have been forced to a particular ToolsVersion for policy reasons. Treating the project as if it had ToolsVersion="Current". For more information, please see http://go.microsoft.com/fwlink/?LinkId=293424.
+Target "AssignTargetPaths" skipped. Previously built successfully.
+Target "AssignProjectConfiguration" skipped, due to false condition; ('$(CurrentSolutionConfigurationContents)' != '' or '@(ProjectReference)'!='') was evaluated as ('' != '' or ''!='').
+Target "_SplitProjectReferencesByFileExistence" skipped. Previously built successfully.
+Target "_GetProjectReferenceTargetFrameworkProperties" skipped. Previously built successfully.
+Target "_PopulateCommonStateForGetCopyToOutputDirectoryItems" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\ZERO_CHECK.vcxproj" (target "GetCopyToOutputDirectoryItems" depends on it):
+Done building target "_PopulateCommonStateForGetCopyToOutputDirectoryItems" in project "ZERO_CHECK.vcxproj".
+Target "GetCopyToOutputDirectoryXamlAppDefs" in file "C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\Microsoft.Xaml.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\ZERO_CHECK.vcxproj" (target "GetCopyToOutputDirectoryItems" depends on it):
+Task "AssignTargetPath"
+Done executing task "AssignTargetPath".
+Done building target "GetCopyToOutputDirectoryXamlAppDefs" in project "ZERO_CHECK.vcxproj".
+Target "GetCopyToOutputDirectoryItems" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\ZERO_CHECK.vcxproj" (entry point):
+Task "CallTarget"
+Target "_PopulateCommonStateForGetCopyToOutputDirectoryItems" skipped. Previously built successfully.
+Target "_AddOutputPathToGlobalPropertiesToRemove" skipped. Previously built successfully.
+Target "_GetCopyToOutputDirectoryItemsFromTransitiveProjectReferences" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\ZERO_CHECK.vcxproj" (target "GetCopyToOutputDirectoryItems" depends on it):
+Task "MSBuild" skipped, due to false condition; ('@(_MSBuildProjectReferenceExistent)' != '' and '$(_GetChildProjectCopyToOutputDirectoryItems)' == 'true' and '%(_MSBuildProjectReferenceExistent.Private)' != 'false' and '$(UseCommonOutputDirectory)' != 'true') was evaluated as ('' != '' and 'true' == 'true' and '' != 'false' and 'false' != 'true').
+Task "AssignTargetPath"
+Done executing task "AssignTargetPath".
+Done building target "_GetCopyToOutputDirectoryItemsFromTransitiveProjectReferences" in project "ZERO_CHECK.vcxproj".
+Done executing task "CallTarget".
+Task "CallTarget"
+Target "AssignTargetPaths" skipped. Previously built successfully.
+Target "_PopulateCommonStateForGetCopyToOutputDirectoryItems" skipped. Previously built successfully.
+Target "_GetCopyToOutputDirectoryItemsFromThisProject" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\ZERO_CHECK.vcxproj" (target "GetCopyToOutputDirectoryItems" depends on it):
+Task "AssignTargetPath"
+Done executing task "AssignTargetPath".
+Done building target "_GetCopyToOutputDirectoryItemsFromThisProject" in project "ZERO_CHECK.vcxproj".
+Done executing task "CallTarget".
+Done building target "GetCopyToOutputDirectoryItems" in project "ZERO_CHECK.vcxproj".
+Done Building Project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\ZERO_CHECK.vcxproj" (GetCopyToOutputDirectoryItems target(s)).
+
+Done executing task "MSBuild".
+Task "AssignTargetPath"
+Done executing task "AssignTargetPath".
+Done building target "_GetCopyToOutputDirectoryItemsFromTransitiveProjectReferences" in project "testing_program.vcxproj".
+Done executing task "CallTarget".
+Task "CallTarget"
+Target "AssignTargetPaths" skipped. Previously built successfully.
+Target "_PopulateCommonStateForGetCopyToOutputDirectoryItems" skipped. Previously built successfully.
+Target "_GetCopyToOutputDirectoryItemsFromThisProject" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "GetCopyToOutputDirectoryItems" depends on it):
+Task "AssignTargetPath"
+Done executing task "AssignTargetPath".
+Done building target "_GetCopyToOutputDirectoryItemsFromThisProject" in project "testing_program.vcxproj".
+Done executing task "CallTarget".
+Done building target "GetCopyToOutputDirectoryItems" in project "testing_program.vcxproj".
+Target "_CopyOutOfDateSourceItemsToOutputDirectory" skipped, due to false condition; ( '@(_SourceItemsToCopyToOutputDirectory)' != '' ) was evaluated as ( '' != '' ).
+Target "_CopyOutOfDateSourceItemsToOutputDirectoryAlways" skipped, due to false condition; ( '@(_SourceItemsToCopyToOutputDirectoryAlways)' != '' ) was evaluated as ( '' != '' ).
+Target "_CopySourceItemsToOutputDirectory" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "CopyFilesToOutputDirectory" depends on it):
+Done building target "_CopySourceItemsToOutputDirectory" in project "testing_program.vcxproj".
+Target "_CopyAppConfigFile" skipped, due to false condition; ( '@(AppConfigWithTargetPath)' != '' ) was evaluated as ( '' != '' ).
+Target "_CopyManifestFiles" skipped, due to false condition; ( '$(_DeploymentCopyApplicationManifest)'=='true' or '$(GenerateClickOnceManifests)'=='true' ) was evaluated as ( ''=='true' or ''=='true' ).
+Target "_CheckForCompileOutputs" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "CopyFilesToOutputDirectory" depends on it):
+Done building target "_CheckForCompileOutputs" in project "testing_program.vcxproj".
+Target "_SGenCheckForOutputs" skipped, due to false condition; ('$(_SGenGenerateSerializationAssembliesConfig)' == 'On' or ('@(WebReferenceUrl)'!='' and '$(_SGenGenerateSerializationAssembliesConfig)' == 'Auto')) was evaluated as ('Off' == 'On' or (''!='' and 'Off' == 'Auto')).
+Target "CopyFilesToOutputDirectory" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "PrepareForRun" depends on it):
+Task "Copy" skipped, due to false condition; ('$(CopyBuildOutputToOutputDirectory)' == 'true' and '$(SkipCopyBuildProduct)' != 'true') was evaluated as ('true' == 'true' and 'true' != 'true').
+Task "CopyRefAssembly" skipped, due to false condition; ('$(ProduceReferenceAssembly)' == 'true' and '$(CopyBuildOutputToOutputDirectory)' == 'true' and '$(SkipCopyBuildProduct)' != 'true') was evaluated as ('false' == 'true' and 'true' == 'true' and 'true' != 'true').
+Task "Message" skipped, due to false condition; ('$(CopyBuildOutputToOutputDirectory)' == 'true' and '$(SkipCopyBuildProduct)'!='true') was evaluated as ('true' == 'true' and 'true'!='true').
+Task "Copy" skipped, due to false condition; ('@(AddModules)' != '') was evaluated as ('' != '').
+Task "Copy" skipped, due to false condition; ('$(_SGenDllCreated)'=='true') was evaluated as ('false'=='true').
+Task "Copy" skipped, due to false condition; ('$(_DebugSymbolsProduced)'=='true' and '$(SkipCopyingSymbolsToOutputDirectory)' != 'true' and '$(CopyOutputSymbolsToOutputDirectory)'=='true') was evaluated as ('false'=='true' and '' != 'true' and 'true'=='true').
+Task "Copy" skipped, due to false condition; ('$(_DocumentationFileProduced)'=='true' and '$(CopyDocumentationFileToOutputDirectory)'=='true') was evaluated as ('false'=='true' and 'true'=='true').
+Task "Copy" skipped, due to false condition; ('@(IntermediateSatelliteAssembliesWithTargetPath)' != '') was evaluated as ('' != '').
+Task "Copy" skipped, due to false condition; ('@(ReferenceComWrappersToCopyLocal)' != '' or '@(ResolvedIsolatedComModules)' != '' or '@(_DeploymentLooseManifestFile)' != '' or '@(NativeReferenceFile)' != '' ) was evaluated as ('' != '' or '' != '' or '' != '' or '' != '' ).
+Task "Copy" skipped, due to false condition; ('$(SkipCopyWinMDArtifact)' != 'true' and '@(WinMDExpArtifacts)' != '') was evaluated as ('' != 'true' and '' != '').
+Task "Message" skipped, due to false condition; ('$(SkipCopyWinMDArtifact)' != 'true' and '$(_WindowsMetadataOutputPath)' != '') was evaluated as ('' != 'true' and '' != '').
+Done building target "CopyFilesToOutputDirectory" in project "testing_program.vcxproj".
+Target "PrepareForRun" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_BuildLinkAction" depends on it):
+Done building target "PrepareForRun" in project "testing_program.vcxproj".
+Target "CustomBuildStep" skipped, due to false condition; ('@(CustomBuildStep)' != '' and '$(SelectedFiles)'=='') was evaluated as ('' != '' and ''=='').
+Target "PostBuildEvent" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "_BuildLinkAction" depends on it):
+Task "Message" skipped, due to false condition; ('%(PostBuildEvent.Message)' != '' and '%(PostBuildEvent.Command)' != '') was evaluated as ('' != '' and '' != '').
+Task "Exec" skipped, due to false condition; ('%(PostBuildEvent.Command)' != '') was evaluated as ('' != '').
+Done building target "PostBuildEvent" in project "testing_program.vcxproj".
+Target "_BuildLinkAction" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "BuildLink" depends on it):
+Done building target "_BuildLinkAction" in project "testing_program.vcxproj".
+Target "BuildLink" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "Build" depends on it):
+Done building target "BuildLink" in project "testing_program.vcxproj".
+Target "AfterBuild" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.BuildSteps.Targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "Build" depends on it):
+Done building target "AfterBuild" in project "testing_program.vcxproj".
+Target "_CheckForCompileOutputs" skipped. Previously built successfully.
+Target "_SGenCheckForOutputs" skipped, due to false condition; ('$(_SGenGenerateSerializationAssembliesConfig)' == 'On' or ('@(WebReferenceUrl)'!='' and '$(_SGenGenerateSerializationAssembliesConfig)' == 'Auto')) was evaluated as ('Off' == 'On' or (''!='' and 'Off' == 'Auto')).
+Target "_CleanGetCurrentAndPriorFileWrites" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "IncrementalClean" depends on it):
+Task "ReadLinesFromFile"
+Done executing task "ReadLinesFromFile".
+Task "ConvertToAbsolutePath"
+Done executing task "ConvertToAbsolutePath".
+Task "FindUnderPath"
+  Comparison path is "C:\Users\Asger\Desktop\programming\stupid-associative-array\build".
+Done executing task "FindUnderPath".
+Task "FindUnderPath"
+  Comparison path is "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\Debug\".
+Done executing task "FindUnderPath".
+Task "FindUnderPath"
+  Comparison path is "testing_program.dir\Debug\".
+Done executing task "FindUnderPath".
+Task "RemoveDuplicates"
+Done executing task "RemoveDuplicates".
+Done building target "_CleanGetCurrentAndPriorFileWrites" in project "testing_program.vcxproj".
+Target "IncrementalClean" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "Build" depends on it):
+Task "FindUnderPath"
+  Comparison path is "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\Debug\".
+Done executing task "FindUnderPath".
+Task "FindUnderPath"
+  Comparison path is "testing_program.dir\Debug\".
+Done executing task "FindUnderPath".
+Task "Delete"
+Done executing task "Delete".
+Task "RemoveDuplicates"
+Done executing task "RemoveDuplicates".
+Task "WriteLinesToFile" skipped, due to false condition; ('@(_CleanUnfilteredPriorFileWrites)'!='@(_CleanUniqueRemainingFileWritesAfterIncrementalClean)') was evaluated as (''!='').
+Done building target "IncrementalClean" in project "testing_program.vcxproj".
+Target "FinalizeBuildStatus" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "Build" depends on it):
+Task "Delete"
+  Deleting file "testing_program.dir\Debug\testing_program.tlog\unsuccessfulbuild".
+Done executing task "Delete".
+Task "Touch"
+  Touching "testing_program.dir\Debug\testing_program.tlog\testing_program.lastbuildstate".
+Done executing task "Touch".
+Done building target "FinalizeBuildStatus" in project "testing_program.vcxproj".
+Target "Build" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.BuildSteps.Targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "Rebuild" depends on it):
+Done building target "Build" in project "testing_program.vcxproj".
+Target "AfterRebuild" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (target "Rebuild" depends on it):
+Done building target "AfterRebuild" in project "testing_program.vcxproj".
+Target "_CheckForInvalidConfigurationAndPlatform" skipped. Previously built successfully.
+Target "Rebuild" in file "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.BuildSteps.Targets" from project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (entry point):
+Done building target "Rebuild" in project "testing_program.vcxproj".
+Done Building Project "C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (rebuild target(s)).
 
 
-Build FAILED.
-
-"C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj" (rebuild target) (1) ->
-(ClCompile target) -> 
-  C:\Users\Asger\Desktop\programming\stupid-associative-array\StupidTable.hpp(113,31): error C2440: 'initializing': cannot convert from 'const _Ty' to 'StupidCompTable<std::string,int>::Bucket &' [C:\Users\Asger\Desktop\programming\stupid-associative-array\build\testing_program.vcxproj]
-
+Build succeeded.
     0 Warning(s)
-    1 Error(s)
+    0 Error(s)
 
-Time Elapsed 00:00:01.23
+Time Elapsed 00:00:01.56

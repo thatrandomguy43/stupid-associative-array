@@ -1,9 +1,12 @@
 #include "StupidTable.hpp"
 #include <string>
 #include <iostream>
+#include <map>
+
 using namespace std;
 
 int main(){
+
     StupidCompTable<string,int> shapes{};
     shapes.set("squares") = 5;
     shapes.set("trianges") = 2;
@@ -34,6 +37,22 @@ int main(){
     roman_numerals.set(500) = 'D';
 
     cout << boolalpha << (roman_numerals == more_roman_numerals) << endl;
+
+    cout << boolalpha << (roman_numerals >= more_roman_numerals) << endl;
+
+    StupidCompTable<string,int> compcheck1{};
+    StupidCompTable<string,int> compcheck2{};
+
+    compcheck1.set("a") = 2;
+    compcheck1.set("d") = 10;
+
+    compcheck2.set("a") = 2;
+    compcheck2.set("d") = 5;
+
+    cout << boolalpha << (compcheck1 < compcheck2) << (compcheck1 > compcheck2) << endl;
+
+    auto roman_itr = roman_numerals.front();
+
     return 0;
 }
 
