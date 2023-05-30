@@ -4,10 +4,113 @@
 #include <optional>
 #include <concepts>
 #include <variant>
+#include <stdexcept>
 
 const int EXPANSION_THRESHOLD = 4;
 const int ITEMS_PER_NEW_BUCKET = 2;
 const int CONTRACTION_THRESHOLD = 1;
+
+
+template <std::totally_ordered key_t, typename value_t> class StupidCompTable;
+
+template <std::totally_ordered key_t, typename value_t> class StupidCompTable<key_t,value_t>::iterator {
+    private:
+        const StupidCompTable<key_t,value_t>* const owner;
+        bool out_of_bounds;
+        key_t key;
+
+    public:
+    iterator(const StupidCompTable<key_t,value_t>* const owner, bool out_of_bounds, key_t key) : owner(owner), out_of_bounds(out_of_bounds), key(key) {
+    }
+
+    void operator++(){
+        this->operator++(0);
+    }
+
+    void operator--(){
+        this->operator--(0);
+    }
+
+    void operator++(int){
+        size_t current_key_bucket_idx = this->owner->search_buckets(key);
+        std::optional<size_t> possibly_removed_key_idx = this->owner->ordered_buckets.at(current_key_bucket_idx).search_contents(key);
+        if (not possibly_removed_key_idx.has_value()){
+            this->out_of_bounds = true;
+            return;
+        }
+        size_t current_key_idx = possibly_removed_key_idx.value();
+        if (current_key_idx == this->owner->ordered_buckets.at(current_key_bucket_idx).contents.size()){
+            while (this->owner->ordered_buckets.at(current_key_bucket_idx).contents.size() == 0)
+            {
+                current_key_bucket_idx++;
+                if (current_key_bucket_idx == this->owner->ordered_buckets.size()){
+                    out_of_bounds = true;
+                    break;
+                }
+            }
+            if (not out_of_bounds) {
+                current_key_idx = 0;
+            }
+        } else {
+            current_key_idx++;
+        }
+        if (not out_of_bounds) {
+            key = this->owner->ordered_buckets.at(current_key_bucket_idx).contents.at(current_key_idx).first;
+        }
+    }
+
+    void operator--(int){
+        size_t current_key_bucket_idx = this->owner->search_buckets(key);
+        std::optional<size_t> possibly_removed_key_idx = this->owner->ordered_buckets.at(current_key_bucket_idx).search_contents(key);
+        if (not possibly_removed_key_idx.has_value()){
+            this->out_of_bounds = true;
+            return;
+        }
+        size_t current_key_idx = possibly_removed_key_idx.value();
+        if (current_key_idx == 0){
+            while (this->owner->ordered_buckets.at(current_key_bucket_idx).size() == 0)
+            {
+                current_key_bucket_idx--;
+                if (current_key_bucket_idx == SIZE_MAX){
+                    out_of_bounds = true;
+                    break;
+                }
+            }
+            if (not out_of_bounds) {
+                current_key_idx = this->owner->ordered_buckets.at(current_key_bucket_idx).size();
+            }
+        } else {
+            current_key_idx--;
+        }
+        if (not out_of_bounds) {
+            key = this->owner->search_buckets.at(current_key_bucket_idx).contents.at(current_key_idx);
+        }
+    }
+    bool is_in_bounds(){
+        return not this->out_of_bounds;
+    }
+    
+    std::pair<key_t,value_t>& operator*() {
+        size_t key_bucket_idx = this->owner->search_buckets(key);
+        std::optional<size_t> possibly_removed_key_idx = this->owner->ordered_buckets.at(current_key_bucket_idx).search_contents(key);
+        if (not possibly_removed_key_idx.has_value()) {
+            throw std::out_of_range("Attempted to dereference invalid iterator");
+        } else {
+            return owner->ordered_buckets.at(key_bucket_idx).contents.at(possibly_removed_key_idx.value());
+        }
+    }
+
+    const std::pair<key_t,value_t>& operator*() {
+        size_t key_bucket_idx = this->owner->search_buckets(key);
+        std::optional<size_t> possibly_removed_key_idx = this->owner->ordered_buckets.at(current_key_bucket_idx).search_contents(key);
+        if (not possibly_removed_key_idx.has_value()) {
+            throw std::out_of_range("Attempted to dereference invalid iterator");
+        } else {
+            return owner->ordered_buckets.at(key_bucket_idx).contents.at(possibly_removed_key_idx.value());
+        }
+    }
+
+};
 
 template <std::totally_ordered key_t, typename value_t> class StupidCompTable
 {
@@ -119,68 +222,7 @@ public:
         this->ordered_buckets.push_back(Bucket{});
     }
 
-    class iterator
-    {
-    private:
-        const StupidCompTable<key_t,value_t>* const owner;
-        bool out_of_bounds;
-        key_t key;
-
-    public:
-    iterator(const StupidCompTable<key_t,value_t>* const owner, bool out_of_bounds, key_t key) : owner(owner), out_of_bounds(out_of_bounds), key(key) {
-    }
-
-    void operator++(){
-        size_t current_key_bucket_idx = owner->search_buckets(key);
-        size_t current_key_idx = owner->ordered_buckets.at(current_key_bucket_idx).search_contents(key);
-        if (current_key_idx == owner->ordered_buckets.at(current_key_bucket_idx).contents.size()){
-            while (owner->ordered_buckets.at(current_key_bucket_idx).size() == 0)
-            {
-                current_key_bucket_idx++;
-                if (current_key_bucket_idx == owner->ordered_buckets.size()){
-                    out_of_bounds = true;
-                    break;
-                }
-            }
-            if (not out_of_bounds) {
-                current_key_idx = 0;
-            }
-        } else {
-            current_key_idx++;
-        }
-        if (not out_of_bounds) {
-            key = owner->search_buckets.at(current_key_bucket_idx).contents.at(current_key_idx);
-        }
-    }
-
-    void operator--(){
-        size_t current_key_bucket_idx = owner->search_buckets(key);
-        size_t current_key_idx = owner->ordered_buckets.at(current_key_bucket_idx).search_contents(key);
-        if (current_key_idx == 0){
-            while (owner->ordered_buckets.at(current_key_bucket_idx).size() == 0)
-            {
-                current_key_bucket_idx--;
-                if (current_key_bucket_idx == SIZE_MAX){
-                    out_of_bounds = true;
-                    break;
-                }
-            }
-            if (not out_of_bounds) {
-                current_key_idx = owner->ordered_buckets.at(current_key_bucket_idx).size();
-            }
-        } else {
-            current_key_idx--;
-        }
-        if (not out_of_bounds) {
-            key = owner->search_buckets.at(current_key_bucket_idx).contents.at(current_key_idx);
-        }
-    }
-    bool is_in_bounds(){
-        return not this->out_of_bounds;
-    }
-    
-
-    };
+    friend class iterator<key_t,value_t>;
     
     StupidCompTable<key_t,value_t>::iterator front(){
 
@@ -348,3 +390,4 @@ public:
         return not (*this < other);
     }
 };
+

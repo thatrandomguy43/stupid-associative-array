@@ -53,6 +53,11 @@ int main(){
 
     auto roman_itr = roman_numerals.front();
 
+    roman_itr++;
+    roman_itr++;
+
+    cout << (*roman_itr).first << " = " << (*roman_itr).second << endl;
+
     return 0;
 }
 
