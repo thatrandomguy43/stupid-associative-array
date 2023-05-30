@@ -11,108 +11,8 @@ const int ITEMS_PER_NEW_BUCKET = 2;
 const int CONTRACTION_THRESHOLD = 1;
 
 
-template <std::totally_ordered key_t, typename value_t> class StupidCompTable;
 
-template <std::totally_ordered key_t, typename value_t> class StupidCompTable<key_t,value_t>::iterator {
-    private:
-        const StupidCompTable<key_t,value_t>* const owner;
-        bool out_of_bounds;
-        key_t key;
-
-    public:
-    iterator(const StupidCompTable<key_t,value_t>* const owner, bool out_of_bounds, key_t key) : owner(owner), out_of_bounds(out_of_bounds), key(key) {
-    }
-
-    void operator++(){
-        this->operator++(0);
-    }
-
-    void operator--(){
-        this->operator--(0);
-    }
-
-    void operator++(int){
-        size_t current_key_bucket_idx = this->owner->search_buckets(key);
-        std::optional<size_t> possibly_removed_key_idx = this->owner->ordered_buckets.at(current_key_bucket_idx).search_contents(key);
-        if (not possibly_removed_key_idx.has_value()){
-            this->out_of_bounds = true;
-            return;
-        }
-        size_t current_key_idx = possibly_removed_key_idx.value();
-        if (current_key_idx == this->owner->ordered_buckets.at(current_key_bucket_idx).contents.size()){
-            while (this->owner->ordered_buckets.at(current_key_bucket_idx).contents.size() == 0)
-            {
-                current_key_bucket_idx++;
-                if (current_key_bucket_idx == this->owner->ordered_buckets.size()){
-                    out_of_bounds = true;
-                    break;
-                }
-            }
-            if (not out_of_bounds) {
-                current_key_idx = 0;
-            }
-        } else {
-            current_key_idx++;
-        }
-        if (not out_of_bounds) {
-            key = this->owner->ordered_buckets.at(current_key_bucket_idx).contents.at(current_key_idx).first;
-        }
-    }
-
-    void operator--(int){
-        size_t current_key_bucket_idx = this->owner->search_buckets(key);
-        std::optional<size_t> possibly_removed_key_idx = this->owner->ordered_buckets.at(current_key_bucket_idx).search_contents(key);
-        if (not possibly_removed_key_idx.has_value()){
-            this->out_of_bounds = true;
-            return;
-        }
-        size_t current_key_idx = possibly_removed_key_idx.value();
-        if (current_key_idx == 0){
-            while (this->owner->ordered_buckets.at(current_key_bucket_idx).size() == 0)
-            {
-                current_key_bucket_idx--;
-                if (current_key_bucket_idx == SIZE_MAX){
-                    out_of_bounds = true;
-                    break;
-                }
-            }
-            if (not out_of_bounds) {
-                current_key_idx = this->owner->ordered_buckets.at(current_key_bucket_idx).size();
-            }
-        } else {
-            current_key_idx--;
-        }
-        if (not out_of_bounds) {
-            key = this->owner->search_buckets.at(current_key_bucket_idx).contents.at(current_key_idx);
-        }
-    }
-    bool is_in_bounds(){
-        return not this->out_of_bounds;
-    }
-    
-    std::pair<key_t,value_t>& operator*() {
-        size_t key_bucket_idx = this->owner->search_buckets(key);
-        std::optional<size_t> possibly_removed_key_idx = this->owner->ordered_buckets.at(current_key_bucket_idx).search_contents(key);
-        if (not possibly_removed_key_idx.has_value()) {
-            throw std::out_of_range("Attempted to dereference invalid iterator");
-        } else {
-            return owner->ordered_buckets.at(key_bucket_idx).contents.at(possibly_removed_key_idx.value());
-        }
-    }
-
-    const std::pair<key_t,value_t>& operator*() {
-        size_t key_bucket_idx = this->owner->search_buckets(key);
-        std::optional<size_t> possibly_removed_key_idx = this->owner->ordered_buckets.at(current_key_bucket_idx).search_contents(key);
-        if (not possibly_removed_key_idx.has_value()) {
-            throw std::out_of_range("Attempted to dereference invalid iterator");
-        } else {
-            return owner->ordered_buckets.at(key_bucket_idx).contents.at(possibly_removed_key_idx.value());
-        }
-    }
-
-};
-
-template <std::totally_ordered key_t, typename value_t> class StupidCompTable
+template <std::totally_ordered key_t, std::default_initializable value_t> class StupidCompTable
 {
 private:
     //templates woooooo
@@ -170,6 +70,9 @@ private:
         return insert_pos;
     }
     };
+
+    
+
     std::vector<Bucket> ordered_buckets{};
     size_t item_count = 0;
 
@@ -218,16 +121,188 @@ private:
 
 public:
 
+    class const_iterator {
+    private:
+        const StupidCompTable<key_t,value_t>* const owner;
+        bool out_of_bounds;
+        key_t key;
+
+    public:
+        const_iterator(const StupidCompTable<key_t,value_t>* const owner, bool out_of_bounds, key_t key) : owner(owner), out_of_bounds(out_of_bounds), key(key) {
+        }
+
+        void operator++(){
+            this->operator++(0);
+        }
+
+        void operator--(){
+            this->operator--(0);
+        }
+
+        void operator++(int){
+            size_t current_key_bucket_idx = this->owner->search_buckets(key);
+            std::optional<size_t> possibly_removed_key_idx = this->owner->ordered_buckets.at(current_key_bucket_idx).search_contents(key);
+            if (not possibly_removed_key_idx.has_value()){
+                this->out_of_bounds = true;
+                return;
+            }
+            size_t current_key_idx = possibly_removed_key_idx.value();
+            if (current_key_idx == this->owner->ordered_buckets.at(current_key_bucket_idx).contents.size() - 1){
+                do {
+                    current_key_bucket_idx++;
+                    if (current_key_bucket_idx == this->owner->ordered_buckets.size()){
+                        out_of_bounds = true;
+                        break;
+                    }
+                } while (this->owner->ordered_buckets.at(current_key_bucket_idx).contents.size() == 0);
+                if (not out_of_bounds) {
+                    current_key_idx = 0;
+                }
+            } else {
+                current_key_idx++;
+            }
+            if (not out_of_bounds) {
+                key = this->owner->ordered_buckets.at(current_key_bucket_idx).contents.at(current_key_idx).first;
+            }
+        }
+
+        void operator--(int){
+            size_t current_key_bucket_idx = this->owner->search_buckets(key);
+            std::optional<size_t> possibly_removed_key_idx = this->owner->ordered_buckets.at(current_key_bucket_idx).search_contents(key);
+            if (not possibly_removed_key_idx.has_value()){
+                this->out_of_bounds = true;
+                return;
+            }
+            size_t current_key_idx = possibly_removed_key_idx.value();
+            if (current_key_idx == 0){
+                do {
+                    current_key_bucket_idx--;
+                    if (current_key_bucket_idx == SIZE_MAX){
+                        out_of_bounds = true;
+                        break;
+                    }
+                } while (this->owner->ordered_buckets.at(current_key_bucket_idx).contents.size() == 0);
+                if (not out_of_bounds) {
+                    current_key_idx = this->owner->ordered_buckets.at(current_key_bucket_idx).contents.size() - 1;
+                }
+            } else {
+                current_key_idx--;
+            }
+            if (not out_of_bounds) {
+                key = this->owner->ordered_buckets.at(current_key_bucket_idx).contents.at(current_key_idx).first;
+            }
+        }
+        bool is_in_bounds() const {
+            return not this->out_of_bounds;
+        }
+
+        const std::pair<key_t,value_t>& operator*() const {
+            size_t key_bucket_idx = this->owner->search_buckets(key);
+            std::optional<size_t> possibly_removed_key_idx = this->owner->ordered_buckets.at(key_bucket_idx).search_contents(key);
+            if (not possibly_removed_key_idx.has_value()) {
+                throw std::out_of_range("Attempted to dereference invalid iterator");
+            } else {
+                return owner->ordered_buckets.at(key_bucket_idx).contents.at(possibly_removed_key_idx.value());
+            }
+        }
+
+    };
+
+    class iterator {
+    private:
+        StupidCompTable<key_t,value_t>* const owner;
+        bool out_of_bounds;
+        key_t key;
+
+    public:
+        iterator(StupidCompTable<key_t,value_t>* const owner, bool out_of_bounds, key_t key) : owner(owner), out_of_bounds(out_of_bounds), key(key) {
+        }
+
+        void operator++(){
+            this->operator++(0);
+        }
+
+        void operator--(){
+            this->operator--(0);
+        }
+
+        void operator++(int){
+            size_t current_key_bucket_idx = this->owner->search_buckets(key);
+            std::optional<size_t> possibly_removed_key_idx = this->owner->ordered_buckets.at(current_key_bucket_idx).search_contents(key);
+            if (not possibly_removed_key_idx.has_value()){
+                this->out_of_bounds = true;
+                return;
+            }
+            size_t current_key_idx = possibly_removed_key_idx.value();
+            if (current_key_idx == this->owner->ordered_buckets.at(current_key_bucket_idx).contents.size() - 1){
+                do {
+                    current_key_bucket_idx++;
+                    if (current_key_bucket_idx == this->owner->ordered_buckets.size()){
+                        out_of_bounds = true;
+                        break;
+                    }
+                } while (this->owner->ordered_buckets.at(current_key_bucket_idx).contents.size() == 0);
+                if (not out_of_bounds) {
+                    current_key_idx = 0;
+                }
+            } else {
+                current_key_idx++;
+            }
+            if (not out_of_bounds) {
+                key = this->owner->ordered_buckets.at(current_key_bucket_idx).contents.at(current_key_idx).first;
+            }
+        }
+
+        void operator--(int){
+            size_t current_key_bucket_idx = this->owner->search_buckets(key);
+            std::optional<size_t> possibly_removed_key_idx = this->owner->ordered_buckets.at(current_key_bucket_idx).search_contents(key);
+            if (not possibly_removed_key_idx.has_value()){
+                this->out_of_bounds = true;
+                return;
+            }
+            size_t current_key_idx = possibly_removed_key_idx.value();
+            if (current_key_idx == 0){
+                do {
+                    current_key_bucket_idx--;
+                    if (current_key_bucket_idx == SIZE_MAX){
+                        out_of_bounds = true;
+                        break;
+                    }
+                } while (this->owner->ordered_buckets.at(current_key_bucket_idx).contents.size() == 0);
+                if (not out_of_bounds) {
+                    current_key_idx = this->owner->ordered_buckets.at(current_key_bucket_idx).contents.size() - 1;
+                }
+            } else {
+                current_key_idx--;
+            }
+            if (not out_of_bounds) {
+                key = this->owner->ordered_buckets.at(current_key_bucket_idx).contents.at(current_key_idx).first;
+            }
+        }
+        bool is_in_bounds() const {
+            return not this->out_of_bounds;
+        }
+        
+        std::pair<key_t,value_t>& operator*() {
+            size_t key_bucket_idx = this->owner->search_buckets(key);
+            std::optional<size_t> possibly_removed_key_idx = this->owner->ordered_buckets.at(key_bucket_idx).search_contents(key);
+            if (not possibly_removed_key_idx.has_value()) {
+                throw std::out_of_range("Attempted to dereference invalid iterator");
+            } else {
+                return owner->ordered_buckets.at(key_bucket_idx).contents.at(possibly_removed_key_idx.value());
+            }
+        }
+
+
+    };
+
     StupidCompTable() {
         this->ordered_buckets.push_back(Bucket{});
     }
-
-    friend class iterator<key_t,value_t>;
     
     StupidCompTable<key_t,value_t>::iterator front(){
-
         if (this->item_count == 0) {
-            return StupidCompTable<key_t,value_t>::iterator{this, true, NULL};
+            return StupidCompTable<key_t,value_t>::iterator{this, true, {}};
         }
         size_t first_item_bucket = 0;
         while (this->ordered_buckets.at(first_item_bucket).contents.size() == 0) {
@@ -236,24 +311,56 @@ public:
         return StupidCompTable<key_t,value_t>::iterator{this, false, this->ordered_buckets.at(first_item_bucket).contents.at(0).first};
     }
 
-    //TODO replace return value with an iterator when i get around to those. this is a little clunky but ok for now. i really don't want to return a dangerous ptr, so nullptr_t makes "no result" explicit.
-    std::variant<std::pair<key_t, value_t>*, nullptr_t> find(key_t lookup_key)  {
+    StupidCompTable<key_t,value_t>::iterator back(){
+        if (this->item_count == 0) {
+            return StupidCompTable<key_t,value_t>::iterator{this, true, {}};
+        }
+        size_t last_item_bucket = this->ordered_buckets.size() - 1;
+        while (this->ordered_buckets.at(last_item_bucket).contents.size() == 0) {
+            last_item_bucket--;
+        }
+        return StupidCompTable<key_t,value_t>::iterator{this, false, this->ordered_buckets.at(last_item_bucket).contents.back().first};
+    }
+
+    StupidCompTable<key_t,value_t>::const_iterator cfront() const {
+        if (this->item_count == 0) {
+            return StupidCompTable<key_t,value_t>::const_iterator{this, true, {}};
+        }
+        size_t first_item_bucket = 0;
+        while (this->ordered_buckets.at(first_item_bucket).contents.size() == 0) {
+            first_item_bucket++;
+        }
+        return StupidCompTable<key_t,value_t>::const_iterator{this, false, this->ordered_buckets.at(first_item_bucket).contents.at(0).first};
+    }
+
+    StupidCompTable<key_t,value_t>::const_iterator cback() const {
+        if (this->item_count == 0) {
+            return StupidCompTable<key_t,value_t>::const_iterator{this, true, {}};
+        }
+        size_t last_item_bucket = this->ordered_buckets.size() - 1;
+        while (this->ordered_buckets.at(last_item_bucket).contents.size() == 0) {
+            last_item_bucket--;
+        }
+        return StupidCompTable<key_t,value_t>::const_iterator{this, false, this->ordered_buckets.at(last_item_bucket).contents.back().first};
+    }
+
+    StupidCompTable<key_t,value_t>::iterator find(key_t lookup_key) {
         Bucket& target_bucket = this->ordered_buckets[this->search_buckets(lookup_key)];
         std::optional<size_t> element_pos = target_bucket.search_contents(lookup_key);
         if (element_pos.has_value()){
-            return &(target_bucket.contents.at(element_pos.value()));
+            return StupidCompTable<key_t,value_t>::iterator{this, false, target_bucket.contents.at(element_pos.value()).first};
         } else {
-            return nullptr;
+            return StupidCompTable<key_t,value_t>::iterator{this, true, {}};
         }
     }
 
-    std::variant<const std::pair<key_t, value_t>*, nullptr_t> find(key_t lookup_key) const {
+    StupidCompTable<key_t,value_t>::const_iterator find(key_t lookup_key) const {
         const Bucket& target_bucket = this->ordered_buckets[this->search_buckets(lookup_key)];
         std::optional<size_t> element_pos = target_bucket.search_contents(lookup_key);
         if (element_pos.has_value()){
-            return &(target_bucket.contents.at(element_pos.value()));
+            return StupidCompTable<key_t,value_t>::const_iterator{this, false, target_bucket.contents.at(element_pos.value()).first};
         } else {
-            return nullptr;
+            return StupidCompTable<key_t,value_t>::const_iterator{this, true, {}};
         }
     }
 
@@ -296,9 +403,9 @@ public:
         for (auto own_bucket : this->ordered_buckets){
             for (auto bucket_item : own_bucket.contents){
                 auto other_search_result = other.find(bucket_item.first);
-                if (std::holds_alternative<nullptr_t>(other_search_result)){
+                if (not other_search_result.is_in_bounds()){
                     return false;
-                } else if (*(std::get<const std::pair<key_t,value_t>*>(other_search_result)) != bucket_item){
+                } else if (*other_search_result != bucket_item){
                     return false;
                 }
             }
@@ -390,4 +497,5 @@ public:
         return not (*this < other);
     }
 };
+
 

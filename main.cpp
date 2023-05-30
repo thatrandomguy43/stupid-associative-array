@@ -11,8 +11,8 @@ int main(){
     shapes.set("squares") = 5;
     shapes.set("trianges") = 2;
     shapes.set("circles") = 4;
-    pair<string,int> count_of_squares = *(get<pair<string,int>*>(shapes.find("squares")));
-    variant<pair<string,int>* ,nullptr_t> count_of_cubes = shapes.find("cubes");
+    pair<string,int> count_of_squares = *(shapes.find("squares"));
+    StupidCompTable<string,int>::iterator count_of_cubes = shapes.find("cubes");
 
     shapes.set("pyramids") = 9;
 
@@ -58,6 +58,19 @@ int main(){
 
     cout << (*roman_itr).first << " = " << (*roman_itr).second << endl;
 
+    roman_itr++;
+    roman_itr++;
+
+    cout << (*roman_itr).first << " = " << (*roman_itr).second << endl;
+    
+    roman_itr--;
+
+    cout << (*roman_itr).first << " = " << (*roman_itr).second << endl;
+
+    roman_itr--;
+    roman_itr--;
+
+    cout << (*roman_itr).first << " = " << (*roman_itr).second << endl;
     return 0;
 }
 
