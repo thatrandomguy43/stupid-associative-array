@@ -2,7 +2,8 @@
 #include <string>
 #include <iostream>
 #include <map>
-
+#include <chrono>
+#include <random>
 using namespace std;
 
 int main(){
@@ -71,6 +72,27 @@ int main(){
     roman_itr--;
 
     cout << (*roman_itr).first << " = " << (*roman_itr).second << endl;
+
+    random_device randint{};
+
+    auto my_start = chrono::high_resolution_clock::now();
+    StupidCompTable<int,int> my_table{};
+    for (int count = 0; count != 100000; count++){
+        my_table.set(randint()) = randint();
+    }
+    auto my_end = chrono::high_resolution_clock::now();
+    cout << "My time: " << (my_end-my_start) / 1us << endl;
+
+    auto std_start = chrono::high_resolution_clock::now();
+    map<int,int> std_table{};
+    for (int count = 0; count != 100000; count++){
+        std_table[randint()] = randint();
+    }
+    auto std_end = chrono::high_resolution_clock::now();
+    cout << "Standard library time: " << (std_end-std_start) / 1us << endl;
+
+
+
     return 0;
 }
 

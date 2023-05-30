@@ -369,6 +369,16 @@ public:
         return this->item_count;
     }
 
+    //repeat above
+    bool empty() const {
+        return this->item_count == 0;
+    }
+
+    void clear(){
+        this->item_count = 0;
+        this->ordered_buckets.clear();
+    }
+
     void erase(key_t delete_key){
         Bucket& target_bucket = this->search_buckets(delete_key);
         std::optional<size_t> element_pos = target_bucket.search_contents(delete_key);
